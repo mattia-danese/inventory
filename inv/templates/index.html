@@ -1,0 +1,43 @@
+{% extends 'template.html' %}
+
+{% block body %}
+
+    <br>
+
+    <div class="button">
+        <a href="{% url 'addProduct' %}" class="btn btn-warning btn-md" role="button">Add Product</a>
+    </div>
+
+    <br>
+
+    <table class = "table table-hover">
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Amount</th>
+                <th>Category</th>
+                <th></th>  <!-- for the edit and delete buttons -->
+            </tr>
+        </thead>
+
+        <tbody>
+            
+            {% for product in products %}
+
+                <tr>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.quantity }}</td>
+                    <td>{{ product.category }}</td>
+                    <td>
+                        <a href="{% url 'editProduct' product.pk %}" class="btn btn-warning btn-md" role="button">Edit</a>
+                        <a href="{% url 'deleteProduct' product.pk %}" class="btn btn-danger btn-md" role="button">Delete</a>
+                    </td>
+                </tr>
+
+            {% endfor %}
+
+
+        </tbody>
+    </table>
+
+{% endblock %}

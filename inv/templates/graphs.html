@@ -1,0 +1,61 @@
+{% extends 'template.html' %}
+
+{% block scripts %}
+
+    <!-- Chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js" 
+    integrity="sha512-Wt1bJGtlnMtGP0dqNFH1xlkLBNpEodaiQ8ZN5JLA5wpc1sUlk/O5uuOMNgvzddzkpvZ9GLyYNa8w2s7rqiTk5Q==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"   
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="   
+    crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function(){
+            var ctx = document.getElementById('myChart');
+            var myChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: [{% for product in products %}'{{product.name}}',{% endfor %}],
+                    datasets: [{
+                        label: 'Product Quantity',
+                        data: [{% for product in products %}{{product.quantity}},{% endfor %}],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        },
+                    }, 
+                    maintainAspectRatio: false
+                }
+            });
+        });
+    </script>
+
+{% endblock %}
+
+
+{% block body %}
+    <canvas id="myChart" width="400" height="400" style="padding-top: 1%;"></canvas>
+{% endblock %}
