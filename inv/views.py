@@ -55,6 +55,9 @@ def deleteProduct(request, pk):
 
     return index(request)
 
+# emails will appear in the terminal window
+# for actual emails to send, change 'sender', 'to', and the very bottom of 
+# 'settings.py' accordingly
 def sendEmail(product, category):
     subject = "0 Inventory Alert!"
     message = 'Product "{}" ({}) has been added or edited and has 0 inventory!'.format(product, category)
@@ -65,25 +68,6 @@ def sendEmail(product, category):
 
 def displayGraph(request):
     products = Products.objects.all()
-    
-    # context_category = {
-    #     'Food'    : 0,
-    #     'Clothes' : 0,
-    #     'Other'   : 0,
-    # }
-    # for p in products:
-    #     context_category[p.category] += 1
-    
-    # print(context_category)
-
-    # context_all = {
-    #     'products' : products,
-    # }
-
-    # context = {
-    #     'category' : context_category,
-    #     'all'      : context_all,
-    # }
 
     products = Products.objects.all()
     context = {
